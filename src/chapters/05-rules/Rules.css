@@ -1,0 +1,343 @@
+/* ───────────────────────────────────────────────────────────────────
+ * Chapter: 05-rules
+ *   Prefix: .ru-
+ *   Settling — decelerating blobs, timeline, compliance, stamp.
+ * ─────────────────────────────────────────────────────────────────── */
+
+.ru-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ── Decelerating background blobs ── */
+.ru-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ru-blob {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--accent);
+  filter: blur(100px);
+  opacity: 0.05;
+  animation: ru-blob-settle 8s ease-out forwards;
+}
+
+.ru-blob--a {
+  width: 500px;
+  height: 500px;
+  top: -80px;
+  left: -80px;
+}
+
+.ru-blob--b {
+  width: 400px;
+  height: 400px;
+  bottom: -60px;
+  right: -60px;
+}
+
+@keyframes ru-blob-settle {
+  0%   { opacity: 0.07; transform: translate(40px, 20px); }
+  100% { opacity: 0.03; transform: translate(0, 0); }
+}
+
+/* ── Frame ── */
+.ru-frame {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.ru-frame--center {
+  align-items: center;
+  text-align: center;
+  gap: 36px;
+}
+
+.ru-frame--comply {
+  align-items: center;
+}
+
+/* ── Section label ── */
+.ru-section-label {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+/* ── Three rules ── */
+.ru-rules {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ru-rule-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-family: var(--font-display-cn);
+  font-size: 32px;
+  color: var(--text);
+  animation: ru-rule-in 0.4s var(--ease-overshoot) both;
+}
+
+.ru-rule-item:nth-child(2) { animation-delay: 0.12s; }
+.ru-rule-item:nth-child(3) { animation-delay: 0.24s; }
+
+.ru-rule-item--accent {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.ru-rule-num {
+  font-family: var(--font-display-en);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--accent);
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ru-rule-text {
+  line-height: 1.3;
+}
+
+/* ── Timeline ── */
+.ru-timeline {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.ru-tl-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 200px;
+  opacity: 0.35;
+  animation: ru-fade-up 0.45s var(--ease-overshoot) both;
+}
+
+.ru-tl-node:nth-child(1) { animation-delay: 0s; }
+.ru-tl-node:nth-child(3) { animation-delay: 0.2s; }
+.ru-tl-node:nth-child(5) { animation-delay: 0.4s; }
+
+.ru-tl-node--active {
+  opacity: 1;
+}
+
+.ru-tl-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3px solid var(--rule);
+  background: var(--surface-2);
+}
+
+.ru-tl-node--active .ru-tl-dot {
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.ru-tl-dot--dest {
+  border-color: var(--accent);
+  border-style: dashed;
+}
+
+.ru-tl-connector {
+  width: 80px;
+  height: 2px;
+  background: var(--rule);
+  margin-top: 9px;
+  flex-shrink: 0;
+}
+
+.ru-tl-label {
+  font-family: var(--font-display-cn);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.ru-tl-sub {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--text-mute);
+}
+
+/* ── Compliance ── */
+.ru-comply-card {
+  padding: 40px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  animation: ru-fade-up 0.45s var(--ease-overshoot);
+}
+
+.ru-comply-title {
+  font-family: var(--font-display-cn);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.ru-comply-items {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--font-display-cn);
+  font-size: 22px;
+  color: var(--text-2);
+}
+
+.ru-comply-sep {
+  color: var(--text-faint);
+}
+
+/* ── Files ── */
+.ru-files {
+  display: flex;
+  gap: 36px;
+}
+
+.ru-file {
+  padding: 32px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: ru-pop-in 0.4s var(--ease-overshoot) both;
+}
+
+.ru-file:nth-child(2) { animation-delay: 0.12s; }
+
+.ru-file-icon {
+  position: relative;
+  width: 48px;
+  height: 56px;
+}
+
+.ru-file-rect {
+  position: absolute;
+  inset: 0;
+  background: var(--surface-3);
+  border: 2px solid var(--rule);
+  border-radius: 6px;
+}
+
+.ru-file-fold {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 16px 16px 0;
+  border-color: transparent var(--rule) transparent transparent;
+}
+
+.ru-file-fold::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: -15px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 14px 14px 0;
+  border-color: transparent var(--surface) transparent transparent;
+}
+
+.ru-file-name {
+  font-family: var(--font-display-cn);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.ru-file-hint {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: var(--text-mute);
+  animation: ru-fade-up 0.3s 0.3s var(--ease-overshoot) both;
+}
+
+/* ── CTA + Stamp ── */
+.ru-cta {
+  font-family: var(--font-display-cn);
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--text);
+  animation: ru-fade-up 0.5s var(--ease-overshoot);
+}
+
+.ru-stamp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 36px 64px;
+  border: 3px solid var(--text-mute);
+  border-radius: 8px;
+  opacity: 0.6;
+  animation: ru-stamp-down 0.6s 0.3s var(--ease-overshoot) both;
+}
+
+.ru-stamp-company {
+  font-family: var(--font-display-cn);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.08em;
+}
+
+.ru-stamp-year {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  color: var(--text-mute);
+  letter-spacing: 0.14em;
+}
+
+/* ── Keyframes ── */
+@keyframes ru-fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ru-rule-in {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes ru-pop-in {
+  0%   { opacity: 0; transform: scale(0.9); }
+  60%  { opacity: 1; transform: scale(1.03); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes ru-stamp-down {
+  0%   { opacity: 0; transform: translateY(-20px) scale(1.08); }
+  60%  { opacity: 0.8; transform: translateY(2px) scale(0.98); }
+  100% { opacity: 0.6; transform: translateY(0) scale(1); }
+}

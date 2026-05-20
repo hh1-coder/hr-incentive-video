@@ -1,0 +1,533 @@
+/* ───────────────────────────────────────────────────────────────────
+ * Chapter: 03-project
+ *   Prefix: .pj-
+ *   Formula assembly — gears, factors, tiers, progress bars, pie.
+ * ─────────────────────────────────────────────────────────────────── */
+
+.pj-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ── Background gears ── */
+.pj-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pj-gear {
+  position: absolute;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  opacity: 0.04;
+}
+
+.pj-gear--lg {
+  width: 500px;
+  height: 500px;
+  top: -100px;
+  right: -100px;
+  animation: pj-spin-slow 40s linear infinite;
+}
+
+.pj-gear--sm {
+  width: 200px;
+  height: 200px;
+  bottom: -40px;
+  left: 10%;
+  animation: pj-spin-slow 25s linear reverse infinite;
+}
+
+.pj-gear--md {
+  width: 340px;
+  height: 340px;
+  top: 30%;
+  left: -80px;
+  animation: pj-spin-slow 32s linear infinite;
+}
+
+@keyframes pj-spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Frame ── */
+.pj-frame {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.pj-frame--center {
+  align-items: center;
+  text-align: center;
+  gap: 36px;
+  max-width: 1400px;
+}
+
+/* ── Section label ── */
+.pj-section-label {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+/* ── Conditions (step 0) ── */
+.pj-conditions {
+  display: flex;
+  gap: 40px;
+}
+
+.pj-cond {
+  padding: 36px 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: pj-pop-in 0.45s var(--ease-overshoot) both;
+}
+
+.pj-cond:nth-child(2) { animation-delay: 0.15s; }
+
+.pj-cond-icon {
+  font-family: var(--font-display-en);
+  font-size: 48px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pj-cond-text {
+  font-family: var(--font-display-cn);
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.pj-warn {
+  font-family: var(--font-display-cn);
+  font-size: 24px;
+  color: #d44;
+  animation: pj-fade-up 0.4s 0.4s var(--ease-overshoot) both;
+}
+
+/* ── Formula chain (step 1) ── */
+.pj-formula-chain {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.pj-factor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 28px 16px;
+  background: var(--surface-3);
+  border-radius: 16px;
+  width: 170px;
+  min-height: 110px;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.pj-factor--in {
+  animation: pj-factor-in 0.45s var(--ease-overshoot) both;
+}
+
+.pj-factor-label {
+  font-family: var(--font-display-cn);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.pj-factor-sub {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-mute);
+  text-align: center;
+  line-height: 1.4;
+  max-width: 150px;
+}
+
+.pj-factor-mul {
+  font-family: var(--font-display-en);
+  font-size: 28px;
+  color: var(--accent);
+  font-weight: 300;
+  margin: 0 8px;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+/* ── Formula strip (steps 2-5) ── */
+.pj-formula-strip {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 14px 28px;
+  background: var(--surface-3);
+  border-radius: 12px;
+  animation: pj-fade-up 0.4s var(--ease-overshoot);
+}
+
+.pj-strip-item {
+  font-family: var(--font-display-cn);
+  font-size: 18px;
+  color: var(--text-faint);
+  padding: 4px 14px;
+  border-radius: 8px;
+  transition: color 0.3s, background 0.3s;
+}
+
+.pj-strip-item--hl {
+  color: var(--accent);
+  background: var(--accent-soft);
+  font-weight: 600;
+}
+
+.pj-strip-op {
+  font-family: var(--font-display-en);
+  font-size: 16px;
+  color: var(--text-faint);
+  margin: 0 2px;
+}
+
+/* ── Tiers row (step 2) ── */
+.pj-tiers-row {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.pj-tier {
+  padding: 28px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 200px;
+  animation: pj-pop-in 0.4s var(--ease-overshoot) both;
+}
+
+.pj-tier:nth-child(2) { animation-delay: 0.1s; }
+.pj-tier:nth-child(3) { animation-delay: 0.2s; }
+
+.pj-tier--none {
+  opacity: 0.4;
+}
+
+.pj-tier-badge {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  padding: 2px 10px;
+}
+
+.pj-tier-label {
+  font-family: var(--font-display-cn);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.pj-tier-status {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-mute);
+}
+
+.pj-tier-no {
+  color: #c44;
+}
+
+/* ── Cycle coefficient (step 3) ── */
+.pj-cycle-formula {
+  font-family: var(--font-display-cn);
+  font-size: 36px;
+  color: var(--text);
+  animation: pj-fade-up 0.45s var(--ease-overshoot);
+}
+
+.pj-frac {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 28px;
+  vertical-align: middle;
+  margin: 0 4px;
+}
+
+.pj-frac-bar {
+  font-size: 20px;
+  color: var(--text-mute);
+  line-height: 0.5;
+}
+
+.pj-cycle-bars {
+  display: flex;
+  gap: 60px;
+}
+
+.pj-cycle-case {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  animation: pj-fade-up 0.4s 0.2s var(--ease-overshoot) both;
+}
+
+.pj-cycle-case:nth-child(2) { animation-delay: 0.4s; }
+
+.pj-cycle-label {
+  font-family: var(--font-display-cn);
+  font-size: 22px;
+  color: var(--text-2);
+}
+
+.pj-cycle-bar-wrap {
+  width: 200px;
+  height: 16px;
+  background: var(--surface-3);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.pj-cycle-bar {
+  height: 100%;
+  border-radius: 8px;
+}
+
+.pj-cycle-bar--good { background: var(--accent); }
+.pj-cycle-bar--bad { background: #c44; }
+
+.pj-cycle-val {
+  font-family: var(--font-mono);
+  font-size: 16px;
+}
+
+.pj-cycle-val--good { color: var(--accent); }
+.pj-cycle-val--bad { color: #c44; }
+
+/* ── Contrib row (step 4): pie + tenure side by side ── */
+.pj-contrib-row {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+}
+
+.pj-pie-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.pj-pie {
+  width: 160px;
+  height: 160px;
+  animation: pj-pop-in 0.5s var(--ease-overshoot);
+}
+
+.pj-pie-label {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: var(--text-mute);
+}
+
+.pj-tenure {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pj-tenure-title {
+  font-family: var(--font-display-cn);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.pj-tenure-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pj-tenure-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 12px 20px;
+  background: var(--surface-3);
+  border-radius: 10px;
+  font-family: var(--font-display-cn);
+  font-size: 20px;
+  color: var(--text-2);
+  animation: pj-row-in 0.4s var(--ease-overshoot) both;
+  width: 240px;
+  box-sizing: border-box;
+}
+
+.pj-tenure-item:nth-child(2) { animation-delay: 0.1s; }
+.pj-tenure-item:nth-child(3) { animation-delay: 0.2s; }
+
+.pj-tenure-item--full {
+  background: var(--accent-soft);
+}
+
+.pj-tenure-val {
+  font-family: var(--font-display-en);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* ── Reward/Punishment (step 5) ── */
+.pj-reward-range {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.pj-reward-zone {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  animation: pj-fade-up 0.45s var(--ease-overshoot) both;
+}
+
+.pj-reward-zone--bad { animation-delay: 0s; }
+.pj-reward-zone--good { animation-delay: 0.2s; }
+
+.pj-reward-tag {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  width: 50px;
+}
+
+.pj-reward-zone--bad .pj-reward-tag { color: #c44; }
+.pj-reward-zone--good .pj-reward-tag { color: var(--accent); }
+
+.pj-reward-bar-wrap {
+  width: 320px;
+  height: 28px;
+  background: var(--surface-3);
+  border-radius: 14px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.pj-reward-bar {
+  height: 100%;
+  border-radius: 14px;
+}
+
+.pj-reward-bar--bad { background: rgba(200, 60, 60, 0.3); }
+.pj-reward-bar--good { background: var(--accent); }
+
+.pj-reward-nums {
+  font-family: var(--font-display-en);
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.pj-reward-zone--bad .pj-reward-nums { color: #c44; }
+.pj-reward-zone--good .pj-reward-nums { color: var(--accent); }
+
+.pj-reward-cause {
+  font-family: var(--font-display-cn);
+  font-size: 18px;
+  color: var(--text-mute);
+}
+
+.pj-footnote {
+  font-family: var(--font-display-cn);
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--text);
+  margin-top: 8px;
+  animation: pj-fade-up 0.4s 0.6s var(--ease-overshoot) both;
+}
+
+/* ── Summary (step 6) ── */
+.pj-summary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pj-sum-item {
+  font-family: var(--font-display-cn);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text);
+  padding: 16px 24px;
+  background: var(--surface-3);
+  border-radius: 12px;
+}
+
+.pj-sum-item--hl {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.pj-sum-op {
+  font-family: var(--font-display-en);
+  font-size: 24px;
+  color: var(--accent);
+  font-weight: 300;
+}
+
+.pj-result {
+  font-family: var(--font-display-cn);
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--accent);
+  margin-top: 8px;
+  animation: pj-pop-in 0.5s 0.3s var(--ease-overshoot) both;
+}
+
+/* ── Keyframes ── */
+@keyframes pj-fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pj-pop-in {
+  0%   { opacity: 0; transform: scale(0.85); }
+  60%  { opacity: 1; transform: scale(1.03); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pj-factor-in {
+  from { opacity: 0; transform: translateY(20px) scale(0.9); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes pj-row-in {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}

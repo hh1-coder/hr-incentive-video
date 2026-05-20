@@ -1,0 +1,420 @@
+/* ───────────────────────────────────────────────────────────────────
+ * Chapter: 02-performance
+ *   Prefix: .pf-
+ *   Data-visualization-driven — bars, lists, cards, numbers.
+ * ─────────────────────────────────────────────────────────────────── */
+
+.pf-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ── Background grid + sparkle dots ── */
+.pf-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pf-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(190, 175, 150, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(190, 175, 150, 0.08) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.pf-dot {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  animation: pf-dot-blink 3s ease-in-out infinite;
+}
+
+.pf-dot--1 { top: 15%; left: 20%; animation-delay: 0s; }
+.pf-dot--2 { top: 30%; right: 25%; animation-delay: 0.8s; }
+.pf-dot--3 { bottom: 25%; left: 35%; animation-delay: 1.6s; }
+.pf-dot--4 { bottom: 40%; right: 30%; animation-delay: 2.4s; }
+
+@keyframes pf-dot-blink {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50%      { opacity: 0.7; transform: scale(2); }
+}
+
+/* ── Frame containers ── */
+.pf-frame {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.pf-frame--center {
+  align-items: center;
+  text-align: center;
+  gap: 40px;
+  max-width: 1200px;
+}
+
+.pf-frame--wide {
+  align-items: flex-start;
+  gap: 32px;
+  padding: 40px 80px;
+  max-width: 1300px;
+}
+
+
+.pf-frame--list {
+  align-items: flex-start;
+  gap: 16px;
+  padding: 40px 100px 40px 140px;
+  max-width: 1100px;
+}
+
+/* ── Section label ── */
+.pf-section-label {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+/* ── Formula ── */
+.pf-formula {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  animation: pf-fade-up 0.55s var(--ease-overshoot);
+}
+
+.pf-formula-part {
+  font-family: var(--font-display-cn);
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--text);
+  padding: 24px 40px;
+  background: var(--surface-3);
+  border-radius: 16px;
+  min-width: 220px;
+  text-align: center;
+}
+
+.pf-formula-op {
+  font-family: var(--font-display-en);
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--accent);
+}
+
+/* ── Coefficient table ── */
+.pf-coeff-table {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.pf-coeff-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  opacity: 0;
+  animation: pf-row-in 0.45s var(--ease-overshoot) both;
+}
+
+.pf-coeff-row--accent {
+  background: var(--accent-soft);
+  border-radius: 12px;
+  padding: 8px 0;
+  margin: 0 -20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.pf-coeff-grade {
+  font-family: var(--font-display-en);
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--text);
+  width: 50px;
+  text-align: center;
+}
+
+.pf-coeff-bar-wrap {
+  flex: 1;
+  height: 28px;
+  background: var(--surface-3);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.pf-coeff-bar {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 14px;
+  opacity: 0.6;
+  transition: width 0.8s var(--ease-quart);
+}
+
+.pf-coeff-row--accent .pf-coeff-bar {
+  opacity: 1;
+  background: var(--accent);
+}
+
+.pf-coeff-val {
+  font-family: var(--font-display-en);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--accent);
+  width: 50px;
+  text-align: center;
+}
+
+.pf-coeff-score {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: var(--text-mute);
+  width: 90px;
+  text-align: center;
+}
+
+.pf-coeff-note {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  width: 60px;
+  text-align: center;
+}
+
+/* ── Footnote ── */
+.pf-footnote {
+  font-family: var(--font-display-cn);
+  font-size: 28px;
+  color: var(--accent);
+  font-weight: 500;
+  align-self: center;
+  animation: pf-fade-up 0.4s 0.5s var(--ease-overshoot) both;
+}
+
+/* ── Attendance card ── */
+.pf-attend-card {
+  padding: 48px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: pf-card-slide 0.5s var(--ease-overshoot);
+}
+
+.pf-attend-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pf-attend-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-display-cn);
+  font-size: 26px;
+  color: var(--text-2);
+}
+
+.pf-attend-icon {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  color: var(--accent);
+  width: 36px;
+  text-align: center;
+}
+
+.pf-attend-arrow {
+  color: var(--text-mute);
+  font-family: var(--font-mono);
+  font-size: 20px;
+}
+
+.pf-attend-result {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.pf-attend-note {
+  font-family: var(--font-display-cn);
+  font-size: 24px;
+  color: var(--text-mute);
+  animation: pf-fade-up 0.35s 0.4s var(--ease-overshoot) both;
+}
+
+/* ── Big question ── */
+.pf-big-question {
+  font-family: var(--font-display-cn);
+  font-size: 88px;
+  font-weight: 700;
+  color: var(--text);
+  animation: pf-fade-up 0.5s var(--ease-overshoot);
+}
+
+.pf-category-hint {
+  font-family: var(--font-display-cn);
+  font-size: 36px;
+  color: var(--text-mute);
+  animation: pf-fade-up 0.4s 0.2s var(--ease-overshoot) both;
+}
+
+/* ── Indicator list ── */
+.pf-list-head {
+  font-family: var(--font-display-cn);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+
+.pf-list-badge {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  padding: 4px 12px;
+}
+
+.pf-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pf-list-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--font-display-cn);
+  font-size: 24px;
+  color: var(--text-mute);
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.pf-list-item--in {
+  animation: pf-item-reveal 0.35s var(--ease-overshoot) both;
+  color: var(--text);
+}
+
+.pf-list-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+.pf-list-item--in .pf-list-dot {
+  opacity: 1;
+}
+
+.pf-list-name {
+  white-space: nowrap;
+}
+
+.pf-list-more {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  color: var(--text-faint);
+  margin-top: 8px;
+  padding-left: 24px;
+}
+
+/* ── Qualitative ── */
+.pf-qual {
+  display: flex;
+  gap: 48px;
+}
+
+.pf-qual-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 36px 40px;
+  background: var(--surface-3);
+  border-radius: 20px;
+  animation: pf-fade-up 0.5s var(--ease-overshoot) both;
+}
+
+.pf-qual-item:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.pf-qual-badge {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  padding: 3px 12px;
+}
+
+.pf-qual-name {
+  font-family: var(--font-display-cn);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.pf-qual-desc {
+  font-family: var(--font-display-cn);
+  font-size: 18px;
+  color: var(--text-mute);
+  max-width: 280px;
+  text-align: center;
+}
+
+.pf-closing {
+  font-family: var(--font-display-cn);
+  font-size: 28px;
+  color: var(--text-mute);
+  margin-top: 16px;
+  animation: pf-fade-up 0.4s 0.3s var(--ease-overshoot) both;
+}
+
+/* ── Shared keyframes ── */
+@keyframes pf-fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pf-row-in {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pf-card-slide {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pf-item-reveal {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}

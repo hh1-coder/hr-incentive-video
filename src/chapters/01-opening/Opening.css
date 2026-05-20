@@ -1,0 +1,317 @@
+/* ───────────────────────────────────────────────────────────────────
+ * Chapter: 01-opening
+ *   Prefix: .op-
+ *   Warm keynote — restrained opening with drifting geometric blobs.
+ * ─────────────────────────────────────────────────────────────────── */
+
+/* ── Scene container ── */
+.op-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ── Background blobs ── */
+.op-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.op-blob {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  filter: blur(120px);
+}
+
+.op-blob--a {
+  width: 620px;
+  height: 620px;
+  top: -160px;
+  left: -120px;
+  animation: op-drift-a 28s ease-in-out infinite;
+}
+
+.op-blob--b {
+  width: 480px;
+  height: 480px;
+  bottom: -140px;
+  right: -80px;
+  animation: op-drift-b 22s ease-in-out infinite;
+}
+
+.op-blob--c {
+  width: 380px;
+  height: 380px;
+  top: 40%;
+  left: 60%;
+  animation: op-drift-c 32s ease-in-out infinite;
+}
+
+/* blobs fade in over steps 0-2 */
+.op-bg[data-step="0"] .op-blob { opacity: 0.04; transition: opacity 1.2s ease; }
+.op-bg[data-step="1"] .op-blob { opacity: 0.05; transition: opacity 0.8s ease; }
+.op-bg[data-step="2"] .op-blob { opacity: 0.06; }
+.op-bg[data-step="3"] .op-blob,
+.op-bg[data-step="4"] .op-blob { opacity: 0.07; animation-duration: 40s; } /* slow down */
+
+@keyframes op-drift-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25%      { transform: translate(80px, 40px) scale(1.08); }
+  50%      { transform: translate(20px, 100px) scale(0.94); }
+  75%      { transform: translate(-40px, 20px) scale(1.04); }
+}
+
+@keyframes op-drift-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(-60px, -30px) scale(1.06); }
+  66%      { transform: translate(40px, -80px) scale(0.92); }
+}
+
+@keyframes op-drift-c {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(-70px, -50px) scale(1.1); }
+}
+
+/* ── Frame containers ── */
+.op-frame {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 1200px;
+  padding: 60px;
+}
+
+.op-frame--center {
+  gap: 40px;
+}
+
+.op-frame--cards {
+  gap: 48px;
+}
+
+/* ── Typography ── */
+.op-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  animation: op-fade-up 0.6s var(--ease-overshoot);
+}
+
+.op-hero--ghost {
+  opacity: 0.25;
+  animation: none;
+}
+
+.op-hero-line {
+  font-family: var(--font-display-cn);
+  font-size: 96px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.op-hero-sub {
+  font-family: var(--font-display-cn);
+  font-size: 48px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+
+.op-tag {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  color: var(--text-mute);
+  letter-spacing: 0.06em;
+}
+
+/* ── Step 1: kicker ── */
+.op-kicker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: op-fade-up 0.55s 0.15s var(--ease-overshoot) both;
+}
+
+.op-big {
+  font-family: var(--font-display-cn);
+  font-size: 88px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.op-mid {
+  font-family: var(--font-display-cn);
+  font-size: 42px;
+  font-weight: 400;
+  color: var(--text-2);
+}
+
+/* ── Step 2: emphasis ── */
+.op-emphasis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: op-fade-up 0.5s var(--ease-overshoot);
+}
+
+.op-emphasis-pre {
+  font-family: var(--font-display-cn);
+  font-size: 44px;
+  font-weight: 400;
+  color: var(--text-2);
+}
+
+.op-emphasis-big {
+  font-family: var(--font-display-cn);
+  font-size: 140px;
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.op-emphasis-accent {
+  color: var(--accent);
+}
+
+.op-bridge {
+  font-family: var(--font-display-cn);
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--text-mute);
+  animation: op-fade-up 0.5s 0.25s var(--ease-overshoot) both;
+  margin-top: 8px;
+}
+
+/* ── Cards section ── */
+.op-section-title {
+  font-family: var(--font-display-cn);
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.04em;
+  animation: op-fade-up 0.5s var(--ease-overshoot);
+}
+
+.op-cards {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+.op-card {
+  width: 300px;
+  padding: 48px 28px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  transition: transform 0.45s var(--ease-overshoot), opacity 0.45s ease;
+}
+
+/* staggered spring entrance for each card */
+.op-card:nth-child(1) { animation: op-card-in 0.55s 0.1s var(--ease-overshoot) both; }
+.op-card:nth-child(2) { animation: op-card-in 0.55s 0.25s var(--ease-overshoot) both; }
+.op-card:nth-child(3) { animation: op-card-in 0.55s 0.4s var(--ease-overshoot) both; }
+
+/* ── Card icons (CSS-drawn placeholders) ── */
+.op-card-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.op-card-icon--coin {
+  background: var(--accent-soft);
+  border: 3px solid var(--accent);
+  position: relative;
+}
+.op-card-icon--coin::after {
+  content: "¥";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display-en);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.op-card-icon--box {
+  background: var(--accent-soft);
+  border-radius: 16px;
+  border: 3px solid var(--accent);
+  position: relative;
+}
+.op-card-icon--box::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 2px;
+  box-shadow: 0 8px 0 var(--accent), 0 -8px 0 var(--accent);
+}
+
+.op-card-icon--star {
+  background: var(--accent-soft);
+  border: 3px solid var(--accent);
+  position: relative;
+}
+.op-card-icon--star::after {
+  content: "◆";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: var(--accent);
+}
+
+.op-card-label {
+  font-family: var(--font-display-cn);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.op-card-hint {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  color: var(--text-mute);
+  letter-spacing: 0.04em;
+}
+
+/* ── Shared keyframes ── */
+@keyframes op-fade-up {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes op-card-in {
+  from { opacity: 0; transform: translateY(48px) scale(0.9); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}

@@ -1,0 +1,256 @@
+/* ───────────────────────────────────────────────────────────────────
+ * Chapter: 04-talent
+ *   Prefix: .tl-
+ *   Upward motion — particles, stair-step ladder, red ceiling line.
+ * ─────────────────────────────────────────────────────────────────── */
+
+.tl-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ── Floating particles ── */
+.tl-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tl-particle {
+  position: absolute;
+  bottom: -10px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  animation: tl-rise linear infinite;
+}
+
+@keyframes tl-rise {
+  0%   { opacity: 0; transform: translateY(0); }
+  20%  { opacity: 0.5; }
+  80%  { opacity: 0.2; }
+  100% { opacity: 0; transform: translateY(-1100px); }
+}
+
+/* ── Frame ── */
+.tl-frame {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.tl-frame--center {
+  align-items: center;
+  text-align: center;
+  gap: 36px;
+}
+
+.tl-frame--wide {
+  align-items: center;
+  gap: 32px;
+  max-width: 1200px;
+}
+
+.tl-frame--ladder {
+  align-items: center;
+  gap: 24px;
+  padding: 40px 100px;
+  max-width: 1100px;
+}
+
+/* ── Section label ── */
+.tl-section-label {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+/* ── Qualification badge ── */
+.tl-qual-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 56px;
+  background: var(--accent-soft);
+  border: 2px solid var(--accent);
+  border-radius: 16px;
+  font-family: var(--font-display-cn);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--text);
+  animation: tl-pop-in 0.5s var(--ease-overshoot);
+}
+
+.tl-qual-icon {
+  color: var(--accent);
+  font-size: 32px;
+}
+
+.tl-qual-hint {
+  font-family: var(--font-display-cn);
+  font-size: 24px;
+  color: var(--text-mute);
+  animation: tl-fade-up 0.4s 0.2s var(--ease-overshoot) both;
+}
+
+/* ── Algorithms ── */
+.tl-algos {
+  display: flex;
+  gap: 40px;
+}
+
+.tl-algo {
+  padding: 36px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: tl-pop-in 0.45s var(--ease-overshoot) both;
+}
+
+.tl-algo:nth-child(2) { animation-delay: 0.15s; }
+
+.tl-algo-label {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.tl-algo-formula {
+  font-family: var(--font-display-cn);
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ── Ceiling ── */
+.tl-ceiling {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  animation: tl-fade-up 0.4s 0.4s var(--ease-overshoot) both;
+}
+
+.tl-ceiling-line {
+  width: 60px;
+  height: 3px;
+  background: #c44;
+  border-radius: 2px;
+}
+
+.tl-ceiling-text {
+  font-family: var(--font-display-cn);
+  font-size: 24px;
+  color: #c44;
+  font-weight: 500;
+}
+
+/* ── Salary ladder ── */
+.tl-ladder {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.tl-rung {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  opacity: 0;
+}
+
+.tl-rung--on {
+  animation: tl-rung-in 0.45s var(--ease-overshoot) both;
+}
+
+.tl-rung-bar {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  background: var(--accent-soft);
+  border-radius: 0 14px 14px 0;
+  padding-left: 28px;
+  min-width: fit-content;
+  transition: width 0.6s var(--ease-quart);
+}
+
+.tl-rung--on:last-child .tl-rung-bar {
+  background: var(--accent);
+}
+
+.tl-rung--on:last-child .tl-rung-title {
+  color: #fff;
+}
+
+.tl-rung-title {
+  font-family: var(--font-display-cn);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.tl-rung-range {
+  font-family: var(--font-display-en);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  min-width: 160px;
+  text-align: right;
+}
+
+.tl-rung-pct {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: var(--text-mute);
+  min-width: 70px;
+  text-align: center;
+}
+
+.tl-note {
+  font-family: var(--font-display-cn);
+  font-size: 28px;
+  color: var(--accent);
+  font-weight: 500;
+  animation: tl-fade-up 0.4s 0.3s var(--ease-overshoot) both;
+}
+
+.tl-ladder--final {
+  max-width: 900px;
+}
+
+.tl-note--final {
+  margin-top: 20px;
+}
+
+/* ── Keyframes ── */
+@keyframes tl-fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes tl-pop-in {
+  0%   { opacity: 0; transform: scale(0.88); }
+  60%  { opacity: 1; transform: scale(1.03); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes tl-rung-in {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
